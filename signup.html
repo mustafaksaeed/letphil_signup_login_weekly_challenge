@@ -52,17 +52,40 @@
     const signupBtn = document.getElementById("signup_Btn");
     const error = document.getElementById("error");
     const success = document.getElementById("signInSuccess");
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //anystring@anystring.anystring
 
     signupBtn.addEventListener("click", function (event) {
       event.preventDefault();
-      if (passwordInput.value !== passwordRepeatInput.value) {
-        error.textContent = "Passwords Must match!";
-      } else {
-        //if they are equal store in object with email and password
-        //prompt sign in successful
 
-        const email = emailInput.value;
-        const password = passwordInput.value;
+      //function for email validation
+      function email_validation() {
+        if (!emailFormat.test(email)) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+
+      function password_check() {
+        if (password !== passwordRepeatInput.value) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+
+      //gonna handle errors here 
+function errorHandler(){
+  
+}
+
+      if (!email_validation() && !password_check()) {
+        error.textContent = "email not in format or passwords are not matching";
+      } else {
+        //if both validations true
+        //prompt sign in successful
 
         const storedDataObjectString = localStorage.getItem("userDataObject");
         let userDataObject = {};
