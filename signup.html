@@ -60,6 +60,7 @@
       event.preventDefault();
 
       //function for email validation
+      //check if format is followed returns false if not 
       function email_validation() {
         if (!emailFormat.test(email)) {
           return false;
@@ -68,6 +69,9 @@
         }
       }
 
+
+      //check for if password length is under 7 only over 7 is accepted 
+      //check if repeat password and password are the same 
       function password_check() {
         if (password !== passwordRepeatInput.value) {
           return false;
@@ -78,12 +82,20 @@
 
       //gonna handle errors here 
 function errorHandler(){
+  if{
+  error.textContent = "email not in format or passwords are not matching";
+}
+  if(!email_validation && password_check() ){
+  error.textContent = "email not in proper format"
+ }else if(!password_check() && email_validation()){
+  error.textContent = "passwords are not the same!"
+ }else{
+  error.textContent = "email not in format or passwords are not matching";
+}
   
 }
 
-      if (!email_validation() && !password_check()) {
-        error.textContent = "email not in format or passwords are not matching";
-      } else {
+
         //if both validations true
         //prompt sign in successful
 
