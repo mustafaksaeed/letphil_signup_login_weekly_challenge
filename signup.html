@@ -54,13 +54,13 @@
     const success = document.getElementById("signInSuccess");
     const email = emailInput.value;
     const password = passwordInput.value;
-    const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //anystring@anystring.anystring
+    const emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/; //anystring@anystring.anystring
 
     signupBtn.addEventListener("click", function (event) {
       event.preventDefault();
 
       //function for email validation
-      //check if format is followed returns false if not 
+      //check if format is followed returns false if not
       function email_validation() {
         if (!emailFormat.test(email)) {
           return false;
@@ -69,9 +69,8 @@
         }
       }
 
-
-      //check for if password length is under 7 only over 7 is accepted 
-      //check if repeat password and password are the same 
+      //check for if password length is under 7 only over 7 is accepted
+      //check if repeat password and password are the same
       function password_check() {
         if (password !== passwordRepeatInput.value) {
           return false;
@@ -80,43 +79,48 @@
         }
       }
 
-      //gonna handle errors here 
-function errorHandler(){
-  if{
-  error.textContent = "email not in format or passwords are not matching";
-}
-  if(!email_validation && password_check() ){
-  error.textContent = "email not in proper format"
- }else if(!password_check() && email_validation()){
-  error.textContent = "passwords are not the same!"
- }else{
-  error.textContent = "email not in format or passwords are not matching";
-}
-  
-}
-
-
-        //if both validations true
-        //prompt sign in successful
-
-        const storedDataObjectString = localStorage.getItem("userDataObject");
-        let userDataObject = {};
-
-        if (storedDataObjectString) {
-          userDataObject = JSON.parse(storedDataObjectString);
+      //gonna handle errors here
+      function errorHandler() {
+        if (!email_validation && !password_check()) {
+          error.textContent =
+            "email not in format or passwords are not matching";
+        } else if (!email_validation) {
+          error.textContent = "email not in proper format";
+        } else if (!password_check()) {
+          error.textContent = "passwords are not the same!";
+        } else {
+          error.textContent = "";
         }
-
-        // each successful submit click is given a user profile with name and email object (rewite this shit from memory and understand it)
-        const UserCount = Object.keys(userDataObject).length + 1;
-        userDataObject[`User${UserCount}`] = {
-          email: email,
-          password: password,
-        };
-
-        localStorage.setItem("userDataObject", JSON.stringify(userDataObject));
-
-        console.log("Data stored in local storage:", userDataObject);
       }
+
+      function saveData() {
+        if (email_validation && password_check) {
+          const storedDataObjectString = localStorage.getItem("userDataObject");
+          let userDataObject = {};
+
+          if (storedDataObjectString) {
+            userDataObject = JSON.parse(storedDataObjectString);
+          }
+
+          // each successful submit click is given a user profile with name and email object (rewite this shit from memory and understand it)
+          const UserCount = Object.keys(userDataObject).length + 1;
+          userDataObject[`User${UserCount}`] = {
+            email: email,
+            password: password,
+          };
+
+          localStorage.setItem(
+            "userDataObject",
+            JSON.stringify(userDataObject)
+          );
+
+          console.log("Data stored in local storage:", userDataObject);
+          success.textContent = "successful!";
+        }
+      }
+
+      errorHandler();
+      saveData();
     });
   </script>
 </html>
@@ -134,5 +138,12 @@ email:
 store emails too, make sure emails are properly formatted regex shit or make it simple by making the type email 
 
 
+
+
+next:
+- fix email formatting
+- problems if inputs are empty 
+- cancel button redirects you to homepage 
+- add a local storage clear button
 
   -->
