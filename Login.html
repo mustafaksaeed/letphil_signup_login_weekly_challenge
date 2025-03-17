@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <label>email</label>
+    <input type="text" placeholder="email" />
+    <label>Password</label>
+    <input type="text" placeholder="Password" />
+  </head>
+  <body>
+    /
+    <script>
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+      //accessing emails and passwords
+      const storedDataString = localStorage.getItem("userDataObject");
+      const userDataObject = JSON.parse(storedDataString);
+      console.log("userDataObject", userDataObject);
+
+      //   next steps access object and check for duplicates and if email matches with password
+    </script>
+  </body>
+</html>
+
+<!-- 
+object containing email and password:
+check if it exists the email
+
+if it exists 
+- email input must match password in local storage 
+
+if everything works 
+- user is logged in and set to welcome page using window.location "href" thing
+-->
