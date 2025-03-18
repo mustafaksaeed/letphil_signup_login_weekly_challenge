@@ -52,17 +52,23 @@
     const signupBtn = document.getElementById("signup_Btn");
     const error = document.getElementById("error");
     const success = document.getElementById("signInSuccess");
-    const email = emailInput.value;
+
     const password = passwordInput.value;
     const emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/; //anystring@anystring.anystring
 
     signupBtn.addEventListener("click", function (event) {
       event.preventDefault();
 
+      const email = emailInput.value;
+      const password = passwordInput.value;
       //function for email validation
       //check if format is followed returns false if not
-      function email_validation() {
-        if (!emailFormat.test(email)) {
+      //change it and handle email error cases
+      function email_validation(email) {
+        console.log("Email input:", email);
+        const isValid = emailFormat.test(email);
+        console.log("Validation result:", isValid);
+        if (!isValid) {
           return false;
         } else {
           return true;
@@ -71,8 +77,8 @@
 
       //check for if password length is under 7 only over 7 is accepted
       //check if repeat password and password are the same
-      function password_check() {
-        if (password !== passwordRepeatInput.value) {
+      function password_check(password, repeatPassword) {
+        if (password !== repeatPassword) {
           return false;
         } else {
           return true;
@@ -80,47 +86,52 @@
       }
 
       //gonna handle errors here
-      function errorHandler() {
-        if (!email_validation && !password_check()) {
+      function errorHandler(email, password) {
+        if (!email && !password) {
           error.textContent =
             "email not in format or passwords are not matching";
-        } else if (!email_validation) {
+        } else if (!email) {
           error.textContent = "email not in proper format";
-        } else if (!password_check()) {
+        } else if (!password) {
           error.textContent = "passwords are not the same!";
         } else {
           error.textContent = "";
         }
       }
 
-      function saveData() {
-        if (email_validation && password_check) {
-          const storedDataObjectString = localStorage.getItem("userDataObject");
-          let userDataObject = {};
+      // function saveData() {
+      //   if (email_validation && password_check {
+      //     const storedDataObjectString = localStorage.getItem("userDataObject");
+      //     let userDataObject = {};
 
-          if (storedDataObjectString) {
-            userDataObject = JSON.parse(storedDataObjectString);
-          }
+      //     if (storedDataObjectString) {
+      //       userDataObject = JSON.parse(storedDataObjectString);
+      //     }
 
-          // each successful submit click is given a user profile with name and email object (rewite this shit from memory and understand it)
-          const UserCount = Object.keys(userDataObject).length + 1;
-          userDataObject[`User${UserCount}`] = {
-            email: email,
-            password: password,
-          };
+      //     // each successful submit click is given a user profile with name and email object (rewite this shit from memory and understand it)
+      //     const UserCount = Object.keys(userDataObject).length + 1;
+      //     userDataObject[`User${UserCount}`] = {
+      //       email: email,
+      //       password: password,
+      //     };
 
-          localStorage.setItem(
-            "userDataObject",
-            JSON.stringify(userDataObject)
-          );
+      //     localStorage.setItem(
+      //       "userDataObject",
+      //       JSON.stringify(userDataObject)
+      //     );
 
-          console.log("Data stored in local storage:", userDataObject);
-          success.textContent = "successful!";
-        }
-      }
+      //     console.log("Data stored in local storage:", userDataObject);
+      //     success.textContent = "successful!";
+      //   }
+      // }
 
-      errorHandler();
-      saveData();
+      const emailResult = email_validation(emailInput.value);
+      const passwordResult = password_check(
+        passwordInput.value,
+        passwordRepeatInput.value
+      );
+      errorHandler(emailResult, passwordResult);
+      // saveData();
     });
   </script>
 </html>
