@@ -97,6 +97,9 @@
           error.textContent = "Email is not in the correct format.";
         } else if (!passwordValid) {
           error.textContent = "Passwords do not match.";
+        } else if (passwordValid && password.length < 7) {
+          error.textContent =
+            "please enter a password greater than 7 characters";
         } else {
           error.textContent = "";
         }
@@ -130,9 +133,10 @@
 
       const emailValue = emailInput.value.trim();
       const passwordValue = passwordInput.value.trim();
+      const passwordRepeat = passwordRepeatInput.value.trim();
 
       const isEmailValid = email_validation(emailValue);
-      const passwordsMatch = password_check(passwordValue);
+      const passwordsMatch = password_check(passwordValue, passwordRepeat);
 
       errorHandler(emailValue, passwordValue, isEmailValid, passwordsMatch);
       // saveData();
@@ -167,6 +171,7 @@ next:
   
 random breakdown:
 
-how tf to handle em
+how tf to handle 
+if both passwords are matching but password is less than 7 prompt them to enter a longer password
   
   -->
