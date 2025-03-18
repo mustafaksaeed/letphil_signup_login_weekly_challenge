@@ -86,14 +86,17 @@
       }
 
       //gonna handle errors here
-      function errorHandler(email, password) {
-        if (!email && !password) {
-          error.textContent =
-            "email not in format or passwords are not matching";
-        } else if (!email) {
-          error.textContent = "email not in proper format";
-        } else if (!password) {
-          error.textContent = "passwords are not the same!";
+      function errorHandler(email, password, emailValid, passwordValid) {
+        if (email === "" && password === "") {
+          error.textContent = "Please enter the email and password.";
+        } else if (email === "") {
+          error.textContent = "Please enter the email.";
+        } else if (password === "") {
+          error.textContent = "Please enter a password.";
+        } else if (!emailValid) {
+          error.textContent = "Email is not in the correct format.";
+        } else if (!passwordValid) {
+          error.textContent = "Passwords do not match.";
         } else {
           error.textContent = "";
         }
@@ -125,12 +128,13 @@
       //   }
       // }
 
-      const emailResult = email_validation(emailInput.value);
-      const passwordResult = password_check(
-        passwordInput.value,
-        passwordRepeatInput.value
-      );
-      errorHandler(emailResult, passwordResult);
+      const emailValue = emailInput.value.trim();
+      const passwordValue = passwordInput.value.trim();
+
+      const isEmailValid = email_validation(emailValue);
+      const passwordsMatch = password_check(passwordValue);
+
+      errorHandler(emailValue, passwordValue, isEmailValid, passwordsMatch);
       // saveData();
     });
   </script>
@@ -157,4 +161,12 @@ next:
 - cancel button redirects you to homepage 
 - add a local storage clear button
 
+  -->
+
+<!-- 
+  
+random breakdown:
+
+how tf to handle em
+  
   -->
