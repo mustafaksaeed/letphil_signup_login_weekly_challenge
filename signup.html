@@ -100,34 +100,34 @@
             "please enter a password greater than 7 characters";
         } else {
           error.textContent = "";
+
+          //saved here
+          const storedDataObjectString = localStorage.getItem(
+            "email",
+            "password"
+          );
+          let userDataObject = {};
+
+          if (storedDataObjectString) {
+            userDataObject = JSON.parse(storedDataObjectString);
+          }
+
+          // each successful submit click is given a user profile with name and email object (rewite this shit from memory and understand it)
+
+          const userInfo = {
+            email: email,
+            password: password,
+          };
+
+          localStorage.setItem(
+            JSON.stringify(userInfo.email),
+            JSON.stringify(UserInfo.password)
+          );
+
+          console.log("Data stored in local storage:", userDataObject);
+          success.textContent = "successful!, account";
         }
       }
-
-      // function saveData() {
-      //   if (email_validation && password_check {
-      //     const storedDataObjectString = localStorage.getItem("userDataObject");
-      //     let userDataObject = {};
-
-      //     if (storedDataObjectString) {
-      //       userDataObject = JSON.parse(storedDataObjectString);
-      //     }
-
-      //     // each successful submit click is given a user profile with name and email object (rewite this shit from memory and understand it)
-      //     const UserCount = Object.keys(userDataObject).length + 1;
-      //     userDataObject[`User${UserCount}`] = {
-      //       email: email,
-      //       password: password,
-      //     };
-
-      //     localStorage.setItem(
-      //       "userDataObject",
-      //       JSON.stringify(userDataObject)
-      //     );
-
-      //     console.log("Data stored in local storage:", userDataObject);
-      //     success.textContent = "successful!";
-      //   }
-      // }
 
       const emailValue = emailInput.value.trim();
       const passwordValue = passwordInput.value.trim();
@@ -137,6 +137,7 @@
       const passwordsMatch = password_check(passwordValue, passwordRepeat);
 
       errorHandler(emailValue, passwordValue, isEmailValid, passwordsMatch);
+
       // saveData();
     });
   </script>
