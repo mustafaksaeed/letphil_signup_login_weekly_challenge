@@ -41,28 +41,24 @@
             //figure out how to get the info from the full array so you can welcome them
 
             /*
-eg. code 
+      eg. code
 
-const userData = { name: "John", age: 30 };
-localStorage.setItem("userData", JSON.stringify(userData));
-
-// Retrieving the object
-const storedUserData = localStorage.getItem("userData");
-const parsedUserData = JSON.parse(storedUserData);
-console.log("Parsed User Data:", parsedUserData);
+      then get that use the find method to find the corresponding name and save to local storage, then use that as welcome
 
 
-then get that use the find method to find the corresponding name and save to local storage, then use that as welcome 
+                  */
 
+            const userData = { email: emailValue };
+            localStorage.setItem("userData", JSON.stringify(userData));
 
-
-
-
-
-            */
-            loginSuccessful = true;
-            error.textContent = "successful";
+            // Retrieving the object
+            const storedUserData = localStorage.getItem("userData");
+            const parsedUserData = JSON.parse(storedUserData);
+            console.log("Parsed User Data:", parsedUserData);
           }
+
+          loginSuccessful = true;
+          error.textContent = "successful";
         }
 
         // if (passwordValue.length === 0 && emailValue.length === 0) {
@@ -83,11 +79,11 @@ then get that use the find method to find the corresponding name and save to loc
           error.textContent = "Invalid email or password.";
         }
 
-        // window.location.href = "./Welcome.html";
+        window.location.href = "./Welcome.html";
       });
 
       document.getElementById("home").addEventListener("click", function () {
-        // window.location.href = "./Home.html"; // Or your actual homepage URL
+        window.location.href = "./Home.html"; // Or your actual homepage URL
       });
     </script>
   </body>

@@ -16,15 +16,29 @@
     const home = document.getElementById("home");
 
     const storedData = localStorage.getItem("allUsers");
-    const userArray = JSON.parse(storedData) || [];
+    const userArray = JSON.parse(storedData);
+
+    const storedUserData = localStorage.getItem("userData");
+            const parsedUserData = JSON.parse(storedUserData);
+            console.log("Parsed User Data:", parsedUserData);
+
+
 
 console.log("userArray", userArray)
 
-//loop throuugh object to find stored email from login and get name from there
+//stored the current email from login using local storage, looped it through the main object to find the corresponding index and pull the name to welcome
 
+let userName = "";
+for (let i = 0; i < userArray.length; i++) {
+    if (parsedUserData.email === userArray[i].email) {
+        userName = userArray[i].name; // Get the name from the matching user object
+        console.log("User:", userName);     
+    }
+}
 
+ 
 
-    welcome.textContent = `welcome ${userArray.name} to !letphil, except its not letphil 💀`
+    welcome.textContent = `welcome ${userName} to !letphil, except its not letphil 💀`
 
 
     console.log("user name", userArray.name)
@@ -41,5 +55,4 @@ console.log("userArray", userArray)
 Things to add 
 name in signup for and last name so we can greet them 
 signout when user clicks signout they are redirected to the home page
-
 
