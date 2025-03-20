@@ -4,38 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <h1 id="home">!letphil</h1>
+    <h3>Login</h3>
     <label>email</label>
     <input type="text" id="email" placeholder="email" />
     <label>Password</label>
     <input type="text" id="password" placeholder="Password" />
     <p id="error"></p>
     <button id="submitBtn">Submit</button>
+    <a href="./ForgotPassword.html">Forgot Password?</a>
   </head>
   <body>
     <script>
       const email = document.getElementById("email");
       const password = document.getElementById("password");
       const error = document.getElementById("error");
+      const cancel = document.getElementById("cancel");
 
       const submitBtn = document.getElementById("submitBtn");
       //accessing emails and passwords
       const storedDataString = localStorage.getItem("allUsers");
-      const userArray = JSON.parse(storedDataString);
+      const userArray = JSON.parse(storedDataString) || [];
       console.log("userArray", userArray);
 
       submitBtn.addEventListener("click", function () {
         const passwordValue = password.value.trim();
         const emailValue = email.value.trim();
-        //if empty values
 
-        if (passwordValue.length === 0 && emailValue.length === 0) {
-          error.textContent = "please input both feilds";
-        } else if (passwordValue.length === 0) {
-          error.textContent = "please enter password";
-        } else {
-          error.textContent = "please enter email";
-        }
-        //check if login matches email and password
         let loginSuccessful = false;
         for (let i = 0; i < userArray.length; i++) {
           if (
@@ -50,9 +45,25 @@
           }
         }
 
-        if (!loginSuccessful) {
+        if (passwordValue.length === 0 && emailValue.length === 0) {
+          error.textContent = "please input both feilds";
+        } else if (passwordValue.length === 0) {
+          error.textContent = "please enter password";
+        } else {
+          error.textContent = "please enter email";
+        }
+
+        if (
+          !loginSuccessful &&
+          passwordValue.length > 0 &&
+          emailValue.length > 0
+        ) {
           error.textContent = "Invalid email or password.";
         }
+      });
+
+      home.addEventListener("click", function () {
+        window.location.href = "./Home.html";
       });
     </script>
   </body>
