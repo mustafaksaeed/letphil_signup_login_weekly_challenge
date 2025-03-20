@@ -11,31 +11,17 @@
       <p>let phil with all the missing features</p>
     </div>
     <div class="buttons">
-      <a href="./Signup.html">Signup</a>
-      <a id="Login" href="./Login.html"> Login</a>
+      <button id="loginBtn">Login</button>
+      <button id="signupBtn">SignUp</button>
     </div>
   </body>
-  <style>
-    .buttons {
-      padding: 1px 6px;
-    }
-    a {
-      border: 1px outset buttonborder;
-      border-radius: 5px;
-      color: black;
-      background-color: grey;
-      text-decoration: none;
-      padding: 0.2rem;
-    }
-    a:hover {
-      text-decoration: none;
-      color: red;
-      background-color: white;
-      border: none;
-    }
-    .logo {
-      display: flex;
-      flex-direction: column;
-    }
-  </style>
+  <script>
+    loginBtn.addEventListener("click", function () {
+      window.location.href = "./login.html";
+    });
+
+    signupBtn.addEventListener("click", function () {
+      window.location.href = "./Signup.html";
+    });
+  </script>
 </html>

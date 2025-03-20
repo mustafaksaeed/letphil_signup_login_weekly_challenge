@@ -5,32 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <label>email</label>
-    <input type="text" placeholder="email" />
+    <input type="text" id="email" placeholder="email" />
     <label>Password</label>
-    <input type="text" placeholder="Password" />
+    <input type="text" id="password" placeholder="Password" />
+    <p id="error"></p>
+    <button id="submitBtn">Submit</button>
   </head>
   <body>
-    /
     <script>
       const email = document.getElementById("email");
       const password = document.getElementById("password");
+      const error = document.getElementById("error");
+
+      const submitBtn = document.getElementById("submitBtn");
       //accessing emails and passwords
-      const storedDataString = localStorage.getItem("userDataObject");
-      const userDataObject = JSON.parse(storedDataString);
-      console.log("userDataObject", userDataObject);
-      
-      //   next steps access object and check for duplicates and if email matches with password
+      const storedDataString = localStorage.getItem("allUsers");
+      const userArray = JSON.parse(storedDataString);
+      console.log("userArray", userArray);
+
+      submitBtn.addEventListener("click", function () {
+        const passwordValue = password.value.trim();
+        const emailValue = email.value.trim();
+        //if empty values
+
+        if (passwordValue.length === 0 && emailValue.length === 0) {
+          error.textContent = "please input both feilds";
+        } else if (passwordValue.length === 0) {
+          error.textContent = "please enter password";
+        } else {
+          error.textContent = "please enter email";
+        }
+        //check if login matches email and password
+        let loginSuccessful = false;
+        for (let i = 0; i < userArray.length; i++) {
+          if (
+            passwordValue === userArray[i].password &&
+            emailValue === userArray[i].email
+          ) {
+            console.log("login successful");
+            loginSuccessful = true;
+            error.textContent = "successful";
+            window.location.href = "./Welcome.html";
+            break;
+          }
+        }
+
+        if (!loginSuccessful) {
+          error.textContent = "Invalid email or password.";
+        }
+      });
     </script>
   </body>
 </html>
 
 <!-- 
-object containing email and password:
-check if it exists the email
+
+[x] = done 
+
+
+object containing email and password: [x]
+check if it exists the email [x]
 
 if it exists 
-- email input must match password in local storage 
+- email input must match password in local storage [x]
 
 if everything works 
-- user is logged in and set to welcome page using window.location "href" thing
+- user is logged in and set to welcome page using window.location "href" thing [x]
+
+
+
+next features
+- error handling for empty feilds []
 -->
