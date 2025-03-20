@@ -20,7 +20,7 @@
       const password = document.getElementById("password");
       const error = document.getElementById("error");
       const cancel = document.getElementById("cancel");
-      const home = document.getElementById("home");
+
       const submitBtn = document.getElementById("submitBtn");
       //accessing emails and passwords
       const storedDataString = localStorage.getItem("allUsers");
@@ -31,28 +31,34 @@
         const passwordValue = password.value.trim();
         const emailValue = email.value.trim();
 
+        let currentUser = {};
         let loginSuccessful = false;
         for (let i = 0; i < userArray.length; i++) {
           if (
             passwordValue === userArray[i].password &&
             emailValue === userArray[i].email
           ) {
-            console.log("login successful");
+            const userinfo = {
+              name: userArray[i].name,
+            };
+
+            //figure out how to get the info from the full array so you can welcome them
+
+            console.log(`login successful ${userinfo.name}`);
             loginSuccessful = true;
             error.textContent = "successful";
-
-            window.location.href = "./Welcome.html";
-            break;
           }
         }
 
-        if (passwordValue.length === 0 && emailValue.length === 0) {
-          error.textContent = "please input both feilds";
-        } else if (passwordValue.length === 0) {
-          error.textContent = "please enter password";
-        } else {
-          error.textContent = "please enter email";
-        }
+        // if (passwordValue.length === 0 && emailValue.length === 0) {
+        //   error.textContent = "please input both feilds";
+        // } else if (passwordValue.length === 0) {
+        //   error.textContent = "please enter password";
+        // } else if (emailValue.length === 0) {
+        //   error.textContent = "please enter email";
+        // } else {
+        //   error.textContent = "";
+        // }
 
         if (
           !loginSuccessful &&
@@ -61,10 +67,11 @@
         ) {
           error.textContent = "Invalid email or password.";
         }
+        window.location.href = "./Welcome.html";
       });
 
-      home.addEventListener("click", function () {
-        window.location.href = "./Home.html";
+      document.getElementById("home").addEventListener("click", function () {
+        window.location.href = "./Home.html"; // Or your actual homepage URL
       });
     </script>
   </body>

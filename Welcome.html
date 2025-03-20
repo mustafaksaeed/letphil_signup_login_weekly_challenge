@@ -6,7 +6,7 @@
     <title>Welcome</title>
   </head>
   <body>
-    <h1>!letphil</h1>
+    <h1 id="home">!letphil</h1>
     <h3 id ="welcome"></h3>
     <button id="signOut">SignOut</button>
   </body>
@@ -15,11 +15,16 @@
     const welcome = document.getElementById("welcome")
     const home = document.getElementById("home");
 
-    const storedDataString = localStorage.getItem("allUsers");
-    const userArray = JSON.parse(storedDataString) || [];
+    const storedData = localStorage.getItem("userInfo");
+    const userArray = JSON.parse(storedData) || [];
+
+console.log("userArray", userArray)
 
 
-    welcome.textContent = `welcome to !letphil, except its not letphil 💀`
+    welcome.textContent = `welcome ${userArray.name} to !letphil, except its not letphil 💀`
+
+
+    console.log("user name", userArray.name)
     signOut.addEventListener("click", function(){
          window.location.href = "./Login.html"
     })
