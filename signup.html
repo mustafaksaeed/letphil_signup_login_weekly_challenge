@@ -52,6 +52,7 @@
     const signupBtn = document.getElementById("signup_Btn");
     const error = document.getElementById("error");
     const success = document.getElementById("signInSuccess");
+    const cancelBtn = document.getElementById("cancelBtn");
 
     const password = passwordInput.value;
     const emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/; //anystring@anystring.anystring
@@ -65,7 +66,7 @@
       function email_validation(email) {
         console.log("Email input:", email);
         const isValid = emailFormat.test(email);
-        console.log("Validation result:", isValid);
+
         if (!isValid) {
           return false;
         } else {
@@ -100,32 +101,33 @@
             "please enter a password greater than 7 characters";
         } else {
           error.textContent = "";
-
-          //saved here
-          const storedDataObjectString = localStorage.getItem(
-            "email",
-            "password"
-          );
-          let userDataObject = {};
-
-          if (storedDataObjectString) {
-            userDataObject = JSON.parse(storedDataObjectString);
-          }
-
-          // each successful submit click is given a user profile with name and email object (rewite this shit from memory and understand it)
+          //check for duplicates here and then save it
 
           const userInfo = {
-            email: email,
-            password: password,
+            email: emailValue, //emailValue
+            password: passwordValue, //passwordValue
           };
 
-          localStorage.setItem(
-            JSON.stringify(userInfo.email),
-            JSON.stringify(UserInfo.password)
-          );
+          // localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
-          console.log("Data stored in local storage:", userDataObject);
-          success.textContent = "successful!, account";
+          // const storedInfo = JSON.parse(localStorage.getItem("userInfo"));
+          // console.log("storedInfo", storedInfo);
+
+          // try to see if there is alUsers key present in localStorage
+          let allUsers = localStorage.getItem("allUsers") || [];
+          allUsers =
+            typeof allUsers === "string" ? JSON.parse(allUsers) : allUsers;
+
+          if (allUsers.find((au) => au.email === userInfo.email)) {
+            error.textContent = "Email Already exists";
+            return;
+          } else {
+            allUsers.push(userInfo);
+            localStorage.setItem("allUsers", JSON.stringify(allUsers));
+          }
+          success.textContent = "Successful! Account created";
+
+          //then redirect to welcome page
         }
       }
 
@@ -138,7 +140,10 @@
 
       errorHandler(emailValue, passwordValue, isEmailValid, passwordsMatch);
 
-      // saveData();
+      cancelBtn.addEventListener("click", function () {
+        //go to home page
+        //clear all feilds
+      });
     });
   </script>
 </html>
