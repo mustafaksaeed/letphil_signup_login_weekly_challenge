@@ -15,10 +15,13 @@
     const welcome = document.getElementById("welcome")
     const home = document.getElementById("home");
 
-    const storedData = localStorage.getItem("userInfo");
+    const storedData = localStorage.getItem("allUsers");
     const userArray = JSON.parse(storedData) || [];
 
 console.log("userArray", userArray)
+
+//loop throuugh object to find stored email from login and get name from there
+
 
 
     welcome.textContent = `welcome ${userArray.name} to !letphil, except its not letphil 💀`

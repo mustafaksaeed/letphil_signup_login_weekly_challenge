@@ -38,13 +38,28 @@
             passwordValue === userArray[i].password &&
             emailValue === userArray[i].email
           ) {
-            const userinfo = {
-              name: userArray[i].name,
-            };
-
             //figure out how to get the info from the full array so you can welcome them
 
-            console.log(`login successful ${userinfo.name}`);
+            /*
+eg. code 
+
+const userData = { name: "John", age: 30 };
+localStorage.setItem("userData", JSON.stringify(userData));
+
+// Retrieving the object
+const storedUserData = localStorage.getItem("userData");
+const parsedUserData = JSON.parse(storedUserData);
+console.log("Parsed User Data:", parsedUserData);
+
+
+then get that use the find method to find the corresponding name and save to local storage, then use that as welcome 
+
+
+
+
+
+
+            */
             loginSuccessful = true;
             error.textContent = "successful";
           }
@@ -67,11 +82,12 @@
         ) {
           error.textContent = "Invalid email or password.";
         }
-        window.location.href = "./Welcome.html";
+
+        // window.location.href = "./Welcome.html";
       });
 
       document.getElementById("home").addEventListener("click", function () {
-        window.location.href = "./Home.html"; // Or your actual homepage URL
+        // window.location.href = "./Home.html"; // Or your actual homepage URL
       });
     </script>
   </body>
