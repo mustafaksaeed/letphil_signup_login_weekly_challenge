@@ -20,7 +20,7 @@
       const password = document.getElementById("password");
       const error = document.getElementById("error");
       const cancel = document.getElementById("cancel");
-
+      const home = document.getElementById("home");
       const submitBtn = document.getElementById("submitBtn");
       //accessing emails and passwords
       const storedDataString = localStorage.getItem("allUsers");
@@ -40,6 +40,7 @@
             console.log("login successful");
             loginSuccessful = true;
             error.textContent = "successful";
+
             window.location.href = "./Welcome.html";
             break;
           }
@@ -87,4 +88,12 @@ if everything works
 
 next features
 - error handling for empty feilds []
+
+
+
+
+
+
+//make a 2 local storage one for all users when signing in and one for current 
+// current is for welcome 
 -->

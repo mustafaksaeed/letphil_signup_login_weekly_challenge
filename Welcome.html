@@ -6,17 +6,27 @@
     <title>Welcome</title>
   </head>
   <body>
-    <h1>welcome to !letphil, except its not letphil 💀 </h1>
+    <h1>!letphil</h1>
+    <h3 id ="welcome"></h3>
     <button id="signOut">SignOut</button>
   </body>
   <script>
     const signOut = document.getElementById("signOut")
+    const welcome = document.getElementById("welcome")
+    const home = document.getElementById("home");
 
+    const storedDataString = localStorage.getItem("allUsers");
+    const userArray = JSON.parse(storedDataString) || [];
+
+
+    welcome.textContent = `welcome to !letphil, except its not letphil 💀`
     signOut.addEventListener("click", function(){
          window.location.href = "./Login.html"
     })
 
-
+    home.addEventListener("click", function () {
+        window.location.href = "./Home.html";
+      });
   </script>
 </html>
 <!-- 
