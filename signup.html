@@ -114,9 +114,6 @@
           // console.log("storedInfo", storedInfo);
 
           // try to see if there is alUsers key present in localStorage
-          let allUsers = localStorage.getItem("allUsers") || [];
-          allUsers =
-            typeof allUsers === "string" ? JSON.parse(allUsers) : allUsers;
 
           if (allUsers.find((au) => au.email === userInfo.email)) {
             error.textContent = "Email Already exists";
@@ -131,6 +128,25 @@
         }
       }
 
+      let allUsers = localStorage.getItem("allUsers") || [];
+      allUsers = typeof allUsers === "string" ? JSON.parse(allUsers) : allUsers;
+
+      //change this to modal popup
+      // console.log("Number of users", allUsers.length, allUsers);
+      // let storageClear = localStorage.clear();
+
+      // if (allUsers.length > 4) {
+      //   document.createElement("button");
+      //   alert(
+      //     "localStorage is going to be full to keep memory within use would you like to delete all users?",
+      //     button.textContent = "clear",
+      //     button.addEventListener("click", function () {
+      //       allUsers = [];
+      //       return localStorage.clear();
+      //     })
+      //   );
+      // }
+
       const emailValue = emailInput.value.trim();
       const passwordValue = passwordInput.value.trim();
       const passwordRepeat = passwordRepeatInput.value.trim();
@@ -140,10 +156,10 @@
 
       errorHandler(emailValue, passwordValue, isEmailValid, passwordsMatch);
 
-      cancelBtn.addEventListener("click", function () {
-        //go to home page
-        //clear all feilds
-      });
+      // cancelBtn.addEventListener("click", function () {
+      //   //go to home page
+      //   //clear all feilds
+      // });
     });
   </script>
 </html>
